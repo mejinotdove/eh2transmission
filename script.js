@@ -15,10 +15,7 @@
 (function() {
   'use strict';
   
-  unsafeWindow.sendDownload = function(btn) {
-    const RPC_ADDR = "";
-    const RPC_AUTH = "";
-    
+  unsafeWindow.sendDownload = function(btn) {    
     var torrent_url = $(btn).siblings('a').attr('href');
     
     // 下载种子文件
@@ -33,11 +30,11 @@
         // 发送添加种子请求
         GM_xmlhttpRequest({
           method: "POST",
-          url: RPC_ADDR,
+          url: GM_getValue('RPC_ADDR'),
           responseType: "json",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": RPC_AUTH,
+            "Authorization": GM_getValue('RPC_AUTH'),
             "X-Transmission-Session-Id": GM_getValue('SESSIONID')
           },
           data:'{"method":"torrent-add","arguments":{"metainfo":"' + base64String +'"}}',
@@ -51,11 +48,11 @@
               // 重新请求
               GM_xmlhttpRequest({
                 method: "POST",
-                url: RPC_ADDR,
+                url: GM_getValue('RPC_ADDR'),
                 responseType: "json",
                 headers: {
                   "Content-Type": "application/json",
-                  "Authorization": RPC_AUTH,
+                  "Authorization": GM_getValue('RPC_AUTH'),
                   "X-Transmission-Session-Id": GM_getValue('SESSIONID')
                 },
                 data:'{"method":"torrent-add","arguments":{"metainfo":"' + base64String +'"},"tag":123}',
