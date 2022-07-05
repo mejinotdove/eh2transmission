@@ -45,7 +45,7 @@
         // 发送添加种子请求
         GM_xmlhttpRequest({
           method: "POST",
-          responseType: "json",
+          responseType: "text",
           url: GM_getValue('APIURL') + '/api/v2/torrents/add',
           headers: {
             // "Cookie": "SID=/exb8FFMTRvw0I47WslTqE4Eu/7b6LGC",
@@ -54,12 +54,16 @@
           },
           data: formData,
           onload: function(response){
-            console.log('请求', response);
-            $('#torrentinfo > div:nth-child(1) > form > div > table > tbody > tr:nth-child(3) > td > a').parent().append('添加成功');
+            if (response.status == 200) {
+              console.log('请求', response);
+              $('#torrentinfo > div:nth-child(1) > form > div > table > tbody > tr:nth-child(3) > td > a').parent().append('添加成功');
+            } else {
+              alert('添加失败!\nstatus code: ' + response.status + '\n详情: ' + response.response);
+            }
           },
           onerror: function(response){
             console.log("请求失败", response);
-            alert('添加失败', response);
+            alert('添加失败!', response);
           }
         });    
     }});
