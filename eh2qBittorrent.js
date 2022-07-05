@@ -7,7 +7,7 @@
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @connect     *
-// @version     1.1
+// @version     1.2
 // @author      takahashi
 // @description 2022/7/5 下午2:56:34
 // ==/UserScript==
@@ -24,10 +24,11 @@
       url: torrent_url,
       responseType:"blob",
       onload: function(r) {
-        // 把种子编码成base64格式
+        var now = new Date();
         var torrentBlob = r.response;
         var formData = new FormData();
         formData.append("torrents", torrentBlob, "test.torrent");
+        formData.append("category", "EH_" + now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate());
                 
         // 发送添加种子请求
         GM_xmlhttpRequest({
