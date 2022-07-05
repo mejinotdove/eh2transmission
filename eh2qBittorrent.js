@@ -7,7 +7,7 @@
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @connect     *
-// @version     1.0
+// @version     1.1
 // @author      takahashi
 // @description 2022/7/5 下午2:56:34
 // ==/UserScript==
