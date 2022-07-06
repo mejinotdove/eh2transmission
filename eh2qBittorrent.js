@@ -7,7 +7,7 @@
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @connect     *
-// @version     1.2
+// @version     1.3
 // @author      takahashi
 // @description 2022/7/5 下午2:56:34
 // ==/UserScript==
@@ -42,7 +42,7 @@
           onload: function(response){
             if (response.status == 200) {
               console.log('请求', response);
-              $('#torrentinfo > div:nth-child(1) > form > div > table > tbody > tr:nth-child(3) > td > a').parent().append('添加成功');
+              $(btn).parent().append('添加成功');
             } else {
               alert('添加失败!\nstatus code: ' + response.status + '\n详情: ' + response.response);
             }
